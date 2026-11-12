@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sumário — Projeto Cookies</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f1f5f9;
+    color: #0f172a;
+    line-height: 1.6;
+    padding: 28px 14px 60px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+
+  .header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #7c3aed 100%);
+    border-radius: 16px;
+    padding: 30px 26px;
+    color: #fff;
+    margin-bottom: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  }
+  .header h1 { font-size: 1.55rem; margin-bottom: 8px; }
+  .header p { opacity: .95; font-size: .95rem; max-width: 760px; }
+  .badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .badge {
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .75rem;
+    font-weight: 700;
+  }
+
+  .secao-titulo {
+    font-size: 1.1rem;
+    margin: 0 0 14px;
+    color: #1e1b4b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .escolhas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .escolha {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.07);
+    border-top: 4px solid #7c3aed;
+  }
+  .escolha .icone { font-size: 1.4rem; display: block; margin-bottom: 6px; }
+  .escolha h3 { font-size: .98rem; color: #1e1b4b; margin-bottom: 6px; }
+  .escolha p { font-size: .84rem; color: #475569; }
+  .escolha code {
+    background: #eef2ff;
+    color: #4338ca;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: .8rem;
+  }
+
+  .demo-box {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.12);
+    margin-bottom: 22px;
+  }
+  .demo-topo {
+    background: #0b0518;
+    color: #f472b6;
+    padding: 10px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: .82rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-bottom: 2px solid #4c1d95;
+  }
+  .demo-topo .status {
+    background: #16a34a;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .demo-corpo {
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    background: #f8fafc;
+  }
+  .card-demo {
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 18px;
+  }
+  .card-demo h3 { font-size: .98rem; margin-bottom: 8px; color: #1e1b4b; }
+  .card-demo p { font-size: .84rem; color: #64748b; margin-bottom: 12px; }
+  .card-demo label {
+    display: block;
+    font-weight: 700;
+    font-size: .8rem;
+    color: #334155;
+    margin-bottom: 4px;
+  }
+  .card-demo input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: .9rem;
+    margin-bottom: 10px;
+  }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+  .card-demo button {
+    background: #7c3aed;
+    color: #fff;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: .82rem;
+  }
+  .card-demo button:hover { background: #6d28d9; }
+  .card-demo button.secundario { background: #64748b; }
+  .card-demo button.secundario:hover { background: #475569; }
+  .terminal {
+    background: #0b0518;
+    color: #a5f3fc;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: .78rem;
+    min-height: 40px;
+    word-break: break-all;
+    line-height: 1.6;
+  }
+
+  .tabela-dev {
+    background: #0b0518;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 22px;
+  }
+  .tabela-dev h3 { color: #f472b6; font-size: .9rem; margin-bottom: 10px; font-family: monospace; }
+  .tabela-dev table { width: 100%; border-collapse: collapse; font-size: .8rem; font-family: 'Courier New', monospace; }
+  .tabela-dev th {
+    background: #1a0f2e;
+    color: #94a3b8;
+    text-align: left;
+    padding: 8px 10px;
+    font-size: .75rem;
+  }
+  .tabela-dev td { padding: 8px 10px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+  .tabela-dev td.vazio { text-align: center; color: #64748b; font-style: italic; padding: 16px; }
+
+  .aviso-live {
+    background: #fef3c7;
+    border-left: 5px solid #d97706;
+    color: #78350f;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: .86rem;
+    margin-bottom: 22px;
+  }
+  .aviso-live code {
+    background: rgba(0,0,0,.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+  }
+
+  .acoes { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    background: #7c3aed;
+    color: #fff;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: 9px;
+    font-weight: 800;
+    font-size: .88rem;
+  }
+  .btn:hover { background: #6d28d9; }
+  .btn.secundario { background: #16a34a; }
+  .btn.secundario:hover { background: #15803d; }
+
+  .rodape { text-align: center; color: #64748b; font-size: .82rem; margin-top: 26px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <h1>🍪 Sumário — Projeto Cookies</h1>
+    <p>As escolhas técnicas do projeto e, logo abaixo, o projeto rodando ao vivo.</p>
+    <div class="badges">
+      <span class="badge">🍪 document.cookie</span>
+      <span class="badge">⏰ max-age</span>
+      <span class="badge">🔒 SameSite</span>
+      <span class="badge">🗺️ path=/</span>
+      <span class="badge">🆔 getElementById</span>
+    </div>
+  </header>
+
+  <h2 class="secao-titulo">🧭 Escolhas do projeto</h2>
+  <div class="escolhas">
+    <div class="escolha">
+      <span class="icone">🔍</span>
+      <h3>Ler cookies</h3>
+      <p>Leitura feita com <code>document.cookie</code> (singular), que devolve todos os cookies do site.</p>
+    </div>
+    <div class="escolha">
+      <span class="icone">💾</span>
+      <h3>Gravar tema</h3>
+      <p>Gravação com <code>max-age=3600</code>, <code>path=/</code> e <code>SameSite=Lax</code>.</p>
+    </div>
+    <div class="escolha">
+      <span class="icone">🗑️</span>
+      <h3>Apagar tema</h3>
+      <p>Remoção com <code>max-age=0</code> e <code>path=/</code> — o navegador descarta na hora.</p>
+    </div>
+    <div class="escolha">
+      <span class="icone">🆔</span>
+      <h3>IDs do HTML</h3>
+      <p>O <code>getElementById</code> usa exatamente o id do input (<code>tema</code>), sem erro.</p>
+    </div>
+    <div class="escolha">
+      <span class="icone">📄</span>
+      <h3>Entrega</h3>
+      <p>Projeto em arquivo único HTML + CSS + JS, pronto para abrir no Live Server.</p>
+    </div>
+    <div class="escolha">
+      <span class="icone">🔒</span>
+      <h3>Segurança</h3>
+      <p>Cookies com <code>SameSite=Lax</code>, a boa prática moderna para privacidade.</p>
+    </div>
+  </div>
+
+  <h2 class="secao-titulo">▶️ Projeto rodando</h2>
+
+  <div class="aviso-live">
+    ⚠️ <strong>Abra pelo Live Server.</strong> O navegador bloqueia cookies em <code>file://</code>. No VS Code: botão direito no arquivo → <code>Open with Live Server</code>.
+  </div>
+
+  <div class="demo-box">
+    <div class="demo-topo">
+      <span>🌐 Demonstração ao vivo — os 3 componentes do projeto</span>
+      <span class="status">funcionando</span>
+    </div>
+    <div class="demo-corpo">
+
+      <div class="card-demo">
+        <h3>🔍 Ler cookies</h3>
+        <p>Mostra os cookies que estão gravados agora.</p>
+        <button onclick="lerCookies()">Ler cookies agora</button>
+        <div class="terminal" id="demo-ler">// Clique para ler</div>
+      </div>
+
+      <div class="card-demo">
+        <h3>💾 Gravar tema</h3>
+        <p>Grava o cookie <code>tema</code> com o valor digitado.</p>
+        <label for="tema">Valor do tema</label>
+        <input type="text" id="tema" value="escuro">
+        <button onclick="gravarTema()">Gravar tema</button>
+        <div class="terminal" id="demo-gravar-resultado">// Clique em "Gravar tema"</div>
+      </div>
+
+      <div class="card-demo">
+        <h3>🗑️ Apagar tema</h3>
+        <p>Remove o cookie <code>tema</code> do navegador.</p>
+        <label for="demo-tema-apagar">Valor do tema</label>
+        <input type="text" id="demo-tema-apagar" value="escuro">
+        <div class="btns">
+          <button onclick="gravarTemaParaApagar()">Gravar tema</button>
+          <button class="secundario" onclick="apagarTema()">Apagar tema</button>
+        </div>
+        <div class="terminal" id="demo-tema-resultado">// Grave e depois apague para testar</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="tabela-dev">
+    <h3>🔍 Tabela de cookies</h3>
+    <table>
+      <thead>
+        <tr><th>Nome</th><th>Valor</th><th>Path</th></tr>
+      </thead>
+      <tbody id="tabela-cookies">
+        <tr><td colspan="3" class="vazio">Nenhum cookie gravado</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="acoes">
+    <a class="btn secundario" href="projeto-cookies.html">▶ Abrir o projeto completo</a>
+  </div>
+
+  <p class="rodape">Projeto Cookies — Tema 10 • Front-end na Prática</p>
+
+</div>
+
+<script>
+function lerCookies() {
+  var atual = document.cookie;
+  document.getElementById("demo-ler").innerHTML = atual ? "Cookies: " + atual : "(nenhum cookie)";
+}
+
+function gravarTema() {
+  var valor = document.getElementById("tema").value;
+  document.cookie = "tema=" + encodeURIComponent(valor) + "; max-age=3600; path=/; SameSite=Lax";
+  document.getElementById("demo-gravar-resultado").innerHTML = "✅ Cookie tema=" + valor + " gravado";
+  atualizarTabela();
+}
+
+function apagarTema() {
+  document.cookie = "tema=; max-age=0; path=/; SameSite=Lax";
+  document.getElementById("demo-tema-resultado").innerHTML = "🗑️ Cookie tema apagado";
+  atualizarTabela();
+}
+
+function gravarTemaParaApagar() {
+  var valor = document.getElementById("demo-tema-apagar").value;
+  document.cookie = "tema=" + encodeURIComponent(valor) + "; max-age=3600; path=/; SameSite=Lax";
+  document.getElementById("demo-tema-resultado").innerHTML = "✅ Cookie tema=" + valor + " gravado";
+  atualizarTabela();
+}
+
+function atualizarTabela() {
+  var tbody = document.getElementById("tabela-cookies");
+  var cookies = document.cookie;
+
+  if (!cookies) {
+    tbody.innerHTML = '<tr><td colspan="3" class="vazio">Nenhum cookie gravado</td></tr>';
+    return;
+  }
+
+  var linhas = [];
+  cookies.split(";").forEach(function(c) {
+    var partes = c.trim().split("=");
+    if (partes.length >= 2) {
+      linhas.push({
+        nome: partes[0].trim(),
+        valor: decodeURIComponent(partes.slice(1).join("="))
+      });
+    }
+  });
+
+  if (linhas.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" class="vazio">Nenhum cookie gravado</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = linhas.map(function(l) {
+    return '<tr><td>' + l.nome + '</td><td>' + l.valor + '</td><td>/</td></tr>';
+  }).join("");
+}
+
+function garantirCookieDemo() {
+  var temTema = document.cookie.split(";").some(function(c) {
+    return c.trim().indexOf("tema=") === 0;
+  });
+  if (!temTema) {
+    document.cookie = "tema=escuro; max-age=3600; path=/; SameSite=Lax";
+  }
+  document.getElementById("demo-ler").innerHTML = "Cookies: " + document.cookie;
+}
+
+garantirCookieDemo();
+atualizarTabela();
+</script>
+</body>
+</html>
